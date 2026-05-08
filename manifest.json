@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Cardmarket Auto-Login",
+  "name": "AiS Auto-Login",
   "version": "1.0",
   "description": "Securely auto-login to Cardmarket with encrypted credential storage. Open source and privacy-focused.",
   "permissions": ["storage", "activeTab"],
-  "host_permissions": ["*://*.cardmarket.com/*"],
+  "host_permissions": ["*://idp.stuba.sk/*", "*://is.stuba.sk/auth/"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -18,10 +18,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.cardmarket.com/*"],
+      "matches": [ "*://idp.stuba.sk/*", "*://is.stuba.sk/auth/"],
       "js": ["content.js"]
     }
   ],
   "author": "Lukáš Kamen",
-  "homepage_url": "https://github.com/FirstLight1/cardmarket-autologin"
+  "homepage_url": "https://github.com/FirstLight1/AIS-autologin"
 }

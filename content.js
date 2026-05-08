@@ -62,9 +62,9 @@ async function decrypt(credObj) {
 function checkLoginStatus() {
     // Check if the user is already logged in by looking for common elements that only appear when logged in
     const isLoggedIn =
-        document.querySelector('[title="Log in"]') === null; // Check if login button exists
+        document.querySelector('#login-btn') === null || document.querySelector('.form-element form-button') === null; // Check if login button exists
 
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
         return;
     }
 
@@ -88,12 +88,14 @@ function loginViaNavbar() {
         const findAndSubmitLoginForm = () => {
 
             // Try to find username/email and password fields anywhere on the page
-            const usernameField = document.querySelector(".username-input");
-            const passwordField = document.querySelector(".password-input");
+            const usernameField = document.querySelector("#username") || document.querySelector('#credential_0');
+            const passwordField = document.querySelector("#password") || document.querySelector('#credential_1');
+            console.log(usernameField);
+            console.log(passwordField);
 
             // Try to find a submit button first
-            const submitButton = document.querySelector('[title="Log in"]');
-
+            const submitButton = document.querySelector('.form-element.form-button') || document.querySelector('#login-btn');
+            console.log(submitButton);
             // If we found username and password fields
             if (usernameField && passwordField) {
 

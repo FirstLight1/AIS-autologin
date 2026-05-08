@@ -127,8 +127,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load saved credentials if they exist
     chrome.storage.local.get(["username", "password"], function (items) {
         if (items.username && items.password) {
-            document.getElementById("username").value = items.username;
-            document.getElementById("password").placeholder = "Password saved";
+            document.getElementById("usernameField").value = items.username;
+            document.getElementById("passwordField").placeholder = "Password saved";
             
         }
     });
@@ -137,8 +137,8 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+        const username = document.getElementById("usernameField").value;
+        const password = document.getElementById("passwordField").value;
 
         const ctBytes = await encrypt(username, password);
         const ctArr = Array.from(ctBytes);
@@ -152,8 +152,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 status.textContent = "Credentials saved!";
                 status.className = "status success";
 
-                document.getElementById("username").value = "";
-                document.getElementById("password").value = "";
+                document.getElementById("usernameField").value = "";
+                document.getElementById("passwordField").value = "";
 
                 setTimeout(function () {
                     status.textContent = "";
