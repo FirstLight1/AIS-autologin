@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "AiS Auto-Login",
   "version": "1.0",
-  "description": "Securely auto-login to Stuba.sk with encrypted credential storage. Open source and privacy-focused.",
+  "description": "Securely auto-login to ais with encrypted credential storage. Open source and privacy-focused.",
   "permissions": ["storage", "activeTab"],
   "host_permissions": ["*://idp.stuba.sk/*", "*://is.stuba.sk/auth/"],
   "action": {

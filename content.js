@@ -1,5 +1,7 @@
+const API = chrome || browser;
+
 async function loadOptions(){
-    const data = await chrome.storage.local.get("checked");
+    const data = await API.storage.local.get("checked");
     return Boolean(data.checked);
 }
 
@@ -75,7 +77,7 @@ function checkLoginStatus() {
 function loginViaNavbar() {
 
     // Get stored credentials and things to derive encryption key
-    chrome.storage.local.get(['username', 'password', 'token', 'salt', 'iv'], function (credentials) {
+    API.storage.local.get(['username', 'password', 'token', 'salt', 'iv'], function (credentials) {
         if (!credentials.username || !credentials.password) {
             return;
         } else {
