@@ -61,16 +61,16 @@ async function decrypt(credObj) {
 };
 
 
-function checkLoginStatus() {
-    // Check if the user is already logged in by looking for common elements that only appear when logged in
-    const isLoggedIn =
-        document.querySelector('#login-btn') === null || document.querySelector('.form-element form-button') === null; // Check if login button exists
+function hasLoginForm() {
+    const usernameField = document.querySelector('#username') || document.querySelector('#credential_0');
+    const passwordField = document.querySelector('#password') || document.querySelector('#credential_1');
+    return Boolean(usernameField && passwordField);
+}
 
-    if (!isLoggedIn) {
+function checkLoginStatus() {
+    if (!hasLoginForm()) {
         return;
     }
-
-    // Look for a login form in the navigation bar
     loginViaNavbar();
 }
 

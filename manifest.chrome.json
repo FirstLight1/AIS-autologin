@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "Securely auto-login to ais with encrypted credential storage. Open source and privacy-focused.",
   "permissions": ["storage", "activeTab"],
-  "host_permissions": ["*://idp.stuba.sk/*", "*://is.stuba.sk/auth/"],
+  "host_permissions": ["*://idp.stuba.sk/*", "*://is.stuba.sk/auth/*"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -18,7 +18,7 @@
   },
   "content_scripts": [
     {
-      "matches": [ "*://idp.stuba.sk/*", "*://is.stuba.sk/auth/"],
+      "matches": [ "*://idp.stuba.sk/*", "*://is.stuba.sk/auth/*"],
       "js": ["content.js"]
     }
   ],
