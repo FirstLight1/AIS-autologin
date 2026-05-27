@@ -1,8 +1,15 @@
 const checkbox = document.querySelector(".checkbox");
+const stateLabel = document.getElementById("stateLabel");
 
-async function loadOptions(){
-    chrome.storage.local.get("checked", (data) =>{
-        checkbox.checked = Boolean(data.checked)
+function updateStateLabel(checked) {
+    stateLabel.textContent = checked ? "Auto-fill enabled" : "Auto-fill disabled";
+}
+
+async function loadOptions() {
+    chrome.storage.local.get("checked", (data) => {
+        const checked = Boolean(data.checked);
+        checkbox.checked = checked;
+        updateStateLabel(checked);
     });
 }
 
@@ -10,31 +17,27 @@ loadOptions();
 
 checkbox.addEventListener("click", async (event) => {
     const checked = event.target.checked;
-    chrome.storage.local.set({checked});
+    chrome.storage.local.set({ checked });
+    updateStateLabel(checked);
 
-    
-    // Check active tab's URL
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-    if (tab.url.includes("https://www.cardmarket.com")) {
-        // Reload the page if it's the one you're targeting
+    if (tab && tab.url && (tab.url.includes("idp.stuba.sk") || tab.url.includes("is.stuba.sk/auth"))) {
         chrome.tabs.reload(tab.id);
     }
+});
 
-})
+const togglePasswordBtn = document.getElementById("togglePassword");
 
-function showPsw(){
-    const x = document.getElementById("password");
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
-}
-
-document.querySelector(".showPSW").addEventListener('click', () => {
-    showPsw();
-})
+togglePasswordBtn.addEventListener("click", () => {
+    const pwd = document.getElementById("passwordField");
+    const willShow = pwd.type === "password";
+    pwd.type = willShow ? "text" : "password";
+    togglePasswordBtn.classList.toggle("is-showing", willShow);
+    const label = willShow ? "Hide password" : "Show password";
+    togglePasswordBtn.setAttribute("aria-label", label);
+    togglePasswordBtn.setAttribute("title", label);
+});
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -129,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (items.username && items.password) {
             document.getElementById("usernameField").value = items.username;
             document.getElementById("passwordField").placeholder = "Password saved";
-            
         }
     });
 
@@ -163,4 +165,3 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     });
 });
-
