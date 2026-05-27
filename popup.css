@@ -26,11 +26,18 @@ html, body {
 }
 
 body {
-  width: 320px;
+  width: 360px;
+  margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 13px;
   color: var(--text);
   background: var(--bg);
+}
+
+@media (max-width: 380px) {
+  body {
+    width: 100%;
+  }
 }
 
 /* Header */
